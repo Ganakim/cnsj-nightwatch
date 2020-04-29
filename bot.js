@@ -21,11 +21,11 @@ bot.on('ready', function (evt) {
 
 function nightwatchToggle(){
     var now = moment()
+    console.log(now.format('hh:mm a'))
     var nextEvent = moment(now.isBefore(times.close) ? `${now.format('ddd')}${times[now.isBefore(times.open) ? 'open' : 'close'].format('ha')}` : `${times.days[times.days.indexOf(now.format('ddd'))+1]}${times.open.format('ha')}`, 'dddha')
-    console.log(nextEvent.format('MM DD ddd hh:mm a'))
     if(nextEvent.diff(now, 'minutes') <= 5){
         for(var user of bot.users){
-            bot[`${now.isAfter(times.close) ? 'removeFrom' : 'addTo'}Role`]({
+            bot[`${(now.isBefore(times.close) && now.isAfter(times.open)) ? 'addTo' : 'removeFrom'}Role`]({
                 serverID: '701961268944306298',
                 userID: user.id,
                 roleID: '704899305181544548'
@@ -34,7 +34,7 @@ function nightwatchToggle(){
     }
     bot.sendMessage({
         to: '702013233212686406',
-        message: `${now.isAfter(times.close) ? 'Disabling' : 'Enabling'} Nightwatch next at ${nextEvent.format('ddd - hh:mma')}`
+        message: `${(now.isBefore(times.close) && now.isAfter(times.open)) ? 'Enabling' : 'Disabling'} Nightwatch next at ${nextEvent.format('ddd - hh:mma')}`
     })
     setTimeout(nightwatchToggle, nextEvent.diff(now, 'miliseconds'))
 }
