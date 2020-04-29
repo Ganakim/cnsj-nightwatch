@@ -21,8 +21,6 @@ bot.on('ready', function (evt) {
 
 function nightwatchToggle(){
     var now = moment()
-    console.log(now.isBefore(times.close), now.isBefore(times.open), now.format('ddd'), times[now.isBefore(times.open) ? 'open' : 'close'].format('ha'), now.isBefore(times.close) ? `${now.format('ddd')}${times[now.isBefore(times.open) ? 'open' : 'close'].format('ha')}` : `${times.days[times.days.indexOf(now.format('ddd'))+1]}${times.open.format('ha')}`)
-    //Make this respond with the correct timezones
     var nextEvent = moment(now.isBefore(times.close) ? `${now.format('ddd')}${times[now.isBefore(times.open) ? 'open' : 'close'].format('ha')}` : `${times.days[times.days.indexOf(now.format('ddd'))+1]}${times.open.format('ha')}`, 'dddha')
     console.log(nextEvent.format('MM DD ddd hh:mm a'))
     if(nextEvent.diff(now, 'minutes') <= 5){
@@ -38,7 +36,7 @@ function nightwatchToggle(){
         to: '702013233212686406',
         message: `${now.isAfter(times.close) ? 'Disabling' : 'Enabling'} Nightwatch next at ${nextEvent.format('ddd - hh:mma')}`
     })
-    // setTimeout(nightwatchToggle, nextEvent.diff(now, 'miliseconds'))
+    setTimeout(nightwatchToggle, nextEvent.diff(now, 'miliseconds'))
 }
 
 bot.on('message', function (user, userID, channelID, message, evt) {
