@@ -22,8 +22,8 @@ bot.on('ready', function (evt) {
 function nightwatchToggle(){
     var now = moment()
     var nextEvent = moment(now.isBefore(times.close) ? `${moment(now.format('ddd'))}${times[now.isBefore(times.open) ? 'open' : 'close'].format('ha')}` : `${times.days[times.days.indexOf(now.format('ddd'))+1]}${times.open.format('ha')}`, 'dddha')
+    console.log(nextEvent.format('MM DD ddd hh:mm a'))
     if(nextEvent.diff(now, 'minutes') <= 5){
-        console.log(nextEvent.format('MM DD ddd hh:mm a'))
         for(var user of bot.users){
             bot[`${now.isAfter(times.close) ? 'removeFrom' : 'addTo'}Role`]({
                 serverID: '701961268944306298',
