@@ -1,0 +1,11 @@
+{
+    "name": "cnsj-nightwatch",
+    "version": "1.0.0",
+    "description": "Code Ninjas Night Watch",
+    "main": "bot.js",
+    "author": "QueenOfMischief",
+    "dependencies": {
+        "discord.io": "https://github.com/woor/discord.io/tarball/gateway_v6",
+        "moment": "^2.24.0"
+    }
+}
