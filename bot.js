@@ -32,9 +32,11 @@ function nightwatchToggle(){
             })
         }
     }
+    var msg = `${(now.isBefore(times.close) && now.isAfter(times.open)) ? 'Enabling' : 'Disabling'} Nightwatch next: ${now.format('ddd') == nextEvent.format('ddd') ? `Today at ${nextEvent.format('hh:mma')}` : `${nextEvent.format('ddd')} at ${nextEvent.format('hh:mma')}`}`
+    console.log(msg)
     bot.sendMessage({
         to: '702013233212686406',
-        message: `${(now.isBefore(times.close) && now.isAfter(times.open)) ? 'Enabling' : 'Disabling'} Nightwatch next at ${nextEvent.format('ddd - hh:mma')}`
+        message: msg
     })
     setTimeout(nightwatchToggle, nextEvent.diff(now, 'miliseconds'))
 }
