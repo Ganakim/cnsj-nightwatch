@@ -20,7 +20,7 @@ bot.on('ready', function (evt) {
 })
 
 function nightwatchToggle(){
-    var now = moment()
+    var now = moment().subtract(6, 'h')
     console.log(now.format('hh:mm a'))
     var nextEvent = moment(now.isBefore(times.close) ? `${now.format('ddd')}${times[now.isBefore(times.open) ? 'open' : 'close'].format('ha')}` : `${times.days[times.days.indexOf(now.format('ddd'))+1]}${times.open.format('ha')}`, 'dddha')
     if(nextEvent.diff(now, 'minutes') <= 5){
