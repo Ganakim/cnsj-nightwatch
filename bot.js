@@ -2,7 +2,7 @@ var Discord = require('discord.io')
 var moment = require('moment')
 
 var bot = new Discord.Client({
-   token: ENV['auth'],
+   token: process.env['auth'],
    autorun: true
 })
 
