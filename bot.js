@@ -1,9 +1,8 @@
 var Discord = require('discord.io')
-var auth = require('./auth.json')
 var moment = require('moment')
 
 var bot = new Discord.Client({
-   token: auth.token,
+   token: ENV['auth'],
    autorun: true
 })
 
